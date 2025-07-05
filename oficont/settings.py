@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'clientes',
+    'bitacora',
 
     # Aplicaciones personalizadas
     'usuarios',
