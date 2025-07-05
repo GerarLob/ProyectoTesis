@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Bienvenido al sistema contable OFICONT</h2>
+<p>Has iniciado sesión como <strong>{{ user.get_role_display }}</strong>.</p>
+{% endblock %}
