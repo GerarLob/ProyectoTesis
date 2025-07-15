@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>¿Eliminar esta venta?</h2>
+<p><strong>{{ venta.descripcion }}</strong> del {{ venta.fecha }} por Q {{ venta.monto }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'lista_ventas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

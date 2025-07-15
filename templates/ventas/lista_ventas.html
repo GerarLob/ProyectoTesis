@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Ventas Registradas</h2>
+<a href="{% url 'crear_venta' %}" class="btn btn-success mb-3">Registrar nueva venta</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for venta in ventas %}
+        <tr>
+            <td>{{ venta.cliente }}</td>
+            <td>{{ venta.fecha }}</td>
+            <td>{{ venta.descripcion }}</td>
+            <td>Q {{ venta.monto }}</td>
+            <td>
+                <a href="{% url 'editar_venta' venta.id %}" class="btn btn-primary btn-sm">Editar</a>
+                <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

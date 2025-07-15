@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>¿Eliminar esta compra?</h2>
+<p><strong>{{ compra.descripcion }}</strong> del {{ compra.fecha }} por Q {{ compra.monto }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'lista_compras' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
