@@ -4,6 +4,8 @@ from .models import Venta
 from .forms import VentaForm
 from bitacora.utils import registrar_accion
 from usuarios.decorators import role_required
+from libros.utils import registrar_asiento
+
 
 @login_required
 @role_required('admin', 'contador')
@@ -19,6 +21,13 @@ def crear_venta(request):
         if form.is_valid():
             venta = form.save()
             registrar_accion(request.user, f"Registró venta: {venta.descripcion} por Q{venta.monto}")
+            registrar_asiento(
+                fecha=venta.fecha,
+                descripcion=f"Venta a {venta.cliente.nombres} {venta.cliente.apellidos}",
+                cuenta="Ventas",
+                debe=0,
+                haber=venta.monto
+            )
             return redirect('lista_ventas')
     else:
         form = VentaForm()
@@ -44,3 +53,5 @@ def eliminar_venta(request, pk):
         venta.delete()
         return redirect('lista_ventas')
     return render(request, 'ventas/eliminar_venta.html', {'venta': venta})
+
+

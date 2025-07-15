@@ -4,6 +4,8 @@ from .models import Compra
 from .forms import CompraForm
 from bitacora.utils import registrar_accion
 from usuarios.decorators import role_required
+from libros.utils import registrar_asiento
+
 
 @login_required
 @role_required('admin', 'contador')
@@ -19,6 +21,13 @@ def crear_compra(request):
         if form.is_valid():
             compra = form.save()
             registrar_accion(request.user, f"Registró compra: {compra.descripcion} por Q{compra.monto}")
+            registrar_asiento(
+                fecha=compra.fecha,
+                descripcion=f"Compra a {compra.proveedor}",
+                cuenta="Compras",
+                debe=compra.monto,
+                haber=0
+            )
             return redirect('lista_compras')
     else:
         form = CompraForm()

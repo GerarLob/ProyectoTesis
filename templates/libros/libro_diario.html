@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Libro Diario</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Cuenta</th>
+            <th>Debe</th>
+            <th>Haber</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for asiento in asientos %}
+        <tr>
+            <td>{{ asiento.fecha }}</td>
+            <td>{{ asiento.descripcion }}</td>
+            <td>{{ asiento.cuenta }}</td>
+            <td>Q {{ asiento.debe }}</td>
+            <td>Q {{ asiento.haber }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
