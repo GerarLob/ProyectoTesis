@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Libro Mayor</h2>
+
+{% if cuentas %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Cuenta</th>
+            <th>Total Debe</th>
+            <th>Total Haber</th>
+            <th>Saldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cuenta in cuentas %}
+        <tr>
+            <td>{{ cuenta.cuenta }}</td>
+            <td>Q {{ cuenta.total_debe }}</td>
+            <td>Q {{ cuenta.total_haber }}</td>
+            <td>
+                {% if cuenta.saldo > 0 %}
+                    Deudor: Q {{ cuenta.saldo }}
+                {% elif cuenta.saldo < 0 %}
+                    Acreedor: Q {{ cuenta.saldo_abs }}
+                {% else %}
+                    Q 0.00
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <div class="alert alert-warning">
+        No hay movimientos registrados en el Libro Mayor aún.
+    </div>
+{% endif %}
+{% endblock %}
