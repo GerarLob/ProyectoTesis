@@ -3,11 +3,37 @@
 {% load form_filters %}
 
 {% block content %}
-<div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
-    <div class="card p-4 shadow" style="min-width: 320px; max-width: 400px; width: 100%;">
-        <div class="text-center">
-            <img src="{% static 'img/logo_oficina.png' %}" alt="Logo Oficina Contable" width="100" class="mb-3">
-        </div>
+<style>
+    body {
+        background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    .glass-card {
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .glass-card input.form-control {
+        background-color: rgba(255, 255, 255, 0.7);
+        border: none;
+    }
+
+    .glass-card input.form-control:focus {
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: none;
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="glass-card p-5 text-center" style="min-width: 320px; max-width: 400px; width: 100%;">
+        <!-- Logo sin fondo -->
+        <img src="{% static 'img/logo-sin-fondo.png' %}" alt="Logo Oficina Contable" width="300" class="mb-3">
+        
 
         {% if form.errors %}
             <div class="alert alert-danger">Usuario o contraseña incorrectos.</div>
@@ -15,11 +41,11 @@
 
         <form method="post">
             {% csrf_token %}
-            <div class="mb-3">
+            <div class="mb-3 text-start">
                 <label for="id_username" class="form-label">Usuario:</label>
                 {{ form.username|add_class:"form-control" }}
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-start">
                 <label for="id_password" class="form-label">Contraseña:</label>
                 {{ form.password|add_class:"form-control" }}
             </div>
